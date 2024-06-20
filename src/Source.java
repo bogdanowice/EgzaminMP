@@ -84,6 +84,9 @@ Zad. 1 (8p) ADT.
 
 
 /*
+
+
+
 Zad. 2 (8p)
 Dana jest teoretyczna maszyna operująca na globalnej tablicy liczb rzeczywistych array
 o rozmiarze n. Jest ona w stanie wykonać operację flip(int i), polegającą na odwróceniu
