@@ -214,15 +214,29 @@ elementu o zadanym indeksie.
         }
 
         public int iterMaxVPath(Tree tree) {
+            if (tree == null) return 0;
 
             LinkStack stack = new LinkStack();
             stack.push(tree.root, 0);
-
+            int sum = 0; //suma aktualnie rozwazanej sciezki
+            int maxsum = Integer.MIN_VALUE;
             while (!stack.isEmpty()) {
-                //pojebalo go do reszty
+                LinkStack.NodeStack temp = stack.pop();
+                int index = temp.index; //index dziecka
+                if (index < temp.info.children.length) { //jesli jest jeszcze jakies dziecko
+                    stack.push(temp.info, index++); //rodzic na stos
+                    stack.push(temp.info.children[index], 0); //dziecko na stos
+                    sum += temp.info.children[index].value; //suma zwiekszona o rozwazane dziecko
+                } else { //dzieci sie skonczyly to cofka
+                    if (sum > maxsum) {
+                        maxsum = sum;
+                    } else {
+                        sum -= temp.info.value;
+                    }
+                }
             }
 
-            return 0;
+            return maxsum;
         }
 
 
