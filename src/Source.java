@@ -110,6 +110,7 @@ elementu o zadanym indeksie. ??
      - o złożoności czasowej O(n2) względem naszej maszyny otrzymasz: (2,5 pkt),
      - o złożoności O(nlog2 n) : (4 pkt).
 
+
      Podaj i uzasadnij złożoność czasową swojej wersji pancakeSort() względem maszyny na
     której operujemy (2 pkt).
 */
