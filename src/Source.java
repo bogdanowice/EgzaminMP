@@ -84,43 +84,73 @@ Zad. 1 (8p) ADT.
     }
 
 
-
-/*
-
+    /*
 
 
-Zad. 2 (8p)
-Dana jest teoretyczna maszyna operująca na globalnej tablicy liczb rzeczywistych array
-o rozmiarze n. Jest ona w stanie wykonać operację flip(int i), polegającą na odwróceniu
-elementów o indeksach od 0 do i w czasie O(1). Przykładowo flip(3) na tablicy [3,8,4,5,1,2] daje
-tablicę [5,4,8,3,1,2]. Jedyną dodatkową metodą, do której mamy dostęp, jest get(int i), która
-zwraca kopię elementu tablicy o indeksie i. Nie mamy więc możliwości zmiany wartości
-elementu o zadanym indeksie. ??
 
-     Napisz w języku Java metodę move(int i, int j), która dla j > i wstawi element o indeksie j w
-    miejsce elementu o indeksie i przesuwając elementy od indeksu i do j-1 w prawo o jedną
-    komórkę.
-     Przykładowo: move(2,4) na tablicy [3,8,4,5,1,2] daje tablicę [3,8,1,4,5,2]. Zaprezentuj
-    działanie poszczególnych instrukcji krok po kroku na przykładzie kilkuelementowej tablicy
-    (2 pkt),
-    (można opuścić i korzystać z funkcji w poniższych krokach).
+    Zad. 2 (8p)
+    Dana jest teoretyczna maszyna operująca na globalnej tablicy liczb rzeczywistych array
+    o rozmiarze n. Jest ona w stanie wykonać operację flip(int i), polegającą na odwróceniu
+    elementów o indeksach od 0 do i w czasie O(1). Przykładowo flip(3) na tablicy [3,8,4,5,1,2] daje
+    tablicę [5,4,8,3,1,2]. Jedyną dodatkową metodą, do której mamy dostęp, jest get(int i), która
+    zwraca kopię elementu tablicy o indeksie i. Nie mamy więc możliwości zmiany wartości
+    elementu o zadanym indeksie. ??
 
-     Napisz funkcję pancakeSort() sortującą elementy tablicy array i podaj dokładny opis jej
-    działanie, przy czym za funkcję:
-     - o złożoności czasowej O(n2) względem naszej maszyny otrzymasz: (2,5 pkt),
-     - o złożoności O(nlog2 n) : (4 pkt).
+         Napisz w języku Java metodę move(int i, int j), która dla j > i wstawi element o indeksie j w
+        miejsce elementu o indeksie i przesuwając elementy od indeksu i do j-1 w prawo o jedną
+        komórkę.
+         Przykładowo: move(2,4) na tablicy [3,8,4,5,1,2] daje tablicę [3,8,1,4,5,2]. Zaprezentuj
+        działanie poszczególnych instrukcji krok po kroku na przykładzie kilkuelementowej tablicy
+        (2 pkt),
+        (można opuścić i korzystać z funkcji w poniższych krokach).
 
-
-     Podaj i uzasadnij złożoność czasową swojej wersji pancakeSort() względem maszyny na
-    której operujemy (2 pkt).
-*/
-class zad2 {
-    public void move(int i, int j) {
-        if (i <= j) return;
+         Napisz funkcję pancakeSort() sortującą elementy tablicy array i podaj dokładny opis jej
+        działanie, przy czym za funkcję:
+         - o złożoności czasowej O(n2) względem naszej maszyny otrzymasz: (2,5 pkt),
+         - o złożoności O(nlog2 n) : (4 pkt).
 
 
+         Podaj i uzasadnij złożoność czasową swojej wersji pancakeSort() względem maszyny na
+        której operujemy (2 pkt).
+    */
+//???? nwm o co mu chodzi z tym get
+    class zad2 {
+        static int[] arr;
+
+        public void move(int i, int j) {
+            if (i <= j) return;
+
+        }
+
+        void swap(int i, int j) {
+            int temp = arr[i];
+            arr[i] = arr[j];
+            arr[j] = temp;
+        }
+
+        int partition(int low, int high) {
+            int pivot = arr[high];
+            int i = (low - 1);
+
+            for (int j = low; j <= high - 1; j++) {
+                if (arr[j] < pivot) {
+                    i++;
+                    swap(i, j);
+                }
+            }
+            swap(i + 1, high);
+            return (i + 1);
+        }
+
+        public void pancakeSort(int low, int high) { //quick sort nlogn
+            if (low < high) {
+                int pivot = partition(low, high);
+
+                pancakeSort(low, pivot - 1);
+                pancakeSort(pivot + 1, high);
+            }
+        }
     }
-}
 
 
     /*
@@ -160,7 +190,7 @@ class zad2 {
                 Node info;
                 int index;
 
-                public NodeStack(Node node, NodeStack prev,int index) {
+                public NodeStack(Node node, NodeStack prev, int index) {
                     info = node;
                     this.prev = prev;
                     this.index = index;
@@ -170,6 +200,7 @@ class zad2 {
             public LinkStack() {
                 top = null;
             }
+
             public NodeStack pop() {
                 if (top != null) {
                     NodeStack temp = top;
@@ -178,6 +209,7 @@ class zad2 {
                 }
                 return null;
             }
+
             public void push(Node x, int index) {
                 top = new NodeStack(x, top, index);
             }
@@ -197,6 +229,7 @@ class zad2 {
 
 
         }
+
         public int recMaxVPath(Node cur) {
             if (cur == null) return 0; //jesli puste
 
@@ -271,7 +304,6 @@ class Graph{
  0 , wpp.
 
      */
-
 
 
 }
