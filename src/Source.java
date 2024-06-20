@@ -82,6 +82,7 @@ Zad. 1 (8p) ADT.
 
 
 
+
 /*
 Zad. 2 (8p)
 Dana jest teoretyczna maszyna operująca na globalnej tablicy liczb rzeczywistych array
