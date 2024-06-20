@@ -116,9 +116,6 @@ elementu o zadanym indeksie.
 
     public static int[] arr;
 
-    public static void main(String[] args) {
-
-    }
 
 
     /*
@@ -269,5 +266,7 @@ class Graph{
  0 , wpp.
 
      */
+
+
 
 }
