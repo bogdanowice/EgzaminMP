@@ -95,7 +95,7 @@ o rozmiarze n. Jest ona w stanie wykonać operację flip(int i), polegającą na
 elementów o indeksach od 0 do i w czasie O(1). Przykładowo flip(3) na tablicy [3,8,4,5,1,2] daje
 tablicę [5,4,8,3,1,2]. Jedyną dodatkową metodą, do której mamy dostęp, jest get(int i), która
 zwraca kopię elementu tablicy o indeksie i. Nie mamy więc możliwości zmiany wartości
-elementu o zadanym indeksie.
+elementu o zadanym indeksie. ??
 
      Napisz w języku Java metodę move(int i, int j), która dla j > i wstawi element o indeksie j w
     miejsce elementu o indeksie i przesuwając elementy od indeksu i do j-1 w prawo o jedną
@@ -113,13 +113,18 @@ elementu o zadanym indeksie.
      Podaj i uzasadnij złożoność czasową swojej wersji pancakeSort() względem maszyny na
     której operujemy (2 pkt).
 */
+class zad2 {
+    public void move(int i, int j) {
+        if (i <= j) return;
 
-    public static int[] arr;
 
+
+    }
+}
 
 
     /*
-        Zad. 2 (8pkt)
+        Zad. 3 (8pkt)
     Rozważ drzewo o następujące strukturze:
         class Node {
          public int value;
@@ -146,7 +151,7 @@ elementu o zadanym indeksie.
     funkcji rekurencyjnej dodatkowe struktury są zabronione.
 
     */
-    class Zad2 {
+    class Zad3 {
         class LinkStack {
             NodeStack top;
 
