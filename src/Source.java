@@ -118,6 +118,7 @@ class zad2 {
     public void move(int i, int j) {
         if (i <= j) return;
 
+
     }
 }
 
