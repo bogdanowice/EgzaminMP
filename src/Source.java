@@ -16,9 +16,6 @@ public class Source {
         ///////////////
 
 
-
-
-
     }
 }
 
@@ -106,8 +103,6 @@ class zad1 {
 
 
 /*
-
-
 
 Zad. 2 (8p)
 Dana jest teoretyczna maszyna operująca na globalnej tablicy liczb rzeczywistych array
@@ -277,9 +272,9 @@ class Zad3 {
 }
 
 
-
-    /*
-    Zad. 5 (8pkt) Grafy
+/*
+🦧🦧🦧🦧
+Zad. 5 (8pkt) Grafy
 Dany jest graf nieskierowany G=(V, E), przy czym V = {a[0], ... , a[n-1]} – zbiór osób,
 E = {{i, j} : osoba a[i] ma kontakt z osobą a[j] }. Ścieżka kontaktów długości k to ciąg osób
 (a[0], ... , a[k]) taki, że a[i] ma a[i+1] na liście kontaktów, O  i < k.
@@ -290,17 +285,28 @@ Podaj złożoność czasową i pamięciową podanych rozwiązań i zwięźle uza
 infinity = +; { nieskończoność }
 
 Deklaracja grafu:
-    class Graph{
-         private int MAX_VERTS = 20;
-         private int adjMat[ ][ ]; // macierz sąsiedztwa
-         private int n; // bieżąca liczba osób
+class Graph{
+     private int MAX_VERTS = 20;
+     private int adjMat[ ][ ]; // macierz sąsiedztwa
+     private int n; // bieżąca liczba osób
+}
+gdzie:
+                 |=   1 , gdy osoba i-ta ma j-tą na liście kontaktów,
+adjMat [i, j] =  |
+                 |=  0 , wpp.
+
+ */
+class zad5 {
+    class Graph {
+        private int MAX_VERTS = 20;
+        private int adjMat[][]; // macierz sąsiedztwa
+        private int n; // bieżąca liczba osób
     }
- gdzie:
- adjMat [i, j] = 1 , gdy osoba i-ta ma j-tą na liście kontaktów,
- 0 , wpp.
 
-     */
 
+
+
+}
 
 /////// EGZAMIN 1 2018/2019
 
@@ -437,7 +443,7 @@ Proszę podać komentarze w liniach kodu funkcji pakuj(…), objaśniające jej 
 class zad22 {
     static int k, // pojemnosc plecaka
             n; // ilość elementów
-    static int [] tab; // tablica elementów
+    static int[] tab; // tablica elementów
     static boolean found;
     static String out; // sekwencja elementów
 
@@ -461,7 +467,7 @@ class zad22 {
 
         // jesli nie znajdzie tam to sprawdzaym kolejna galaz
         int temp = backpack.pop(); //zdejmujemy to ktora nie wyszla
-        return pakuj(weight,backpack,takeThis - 1, sum - temp);
+        return pakuj(weight, backpack, takeThis - 1, sum - temp);
     }
 
 //    public static void main (String[] args) {
@@ -630,7 +636,7 @@ UWAGA. Rozwiązanie nie może korzystać z metod przeglądu grafów BFS i DFS.
 class zad42 {
     class Graph {
         private int MAX_VERTS = 20;
-        private int adjMat[ ][ ]; // macierz sąsiedztwa
+        private int adjMat[][]; // macierz sąsiedztwa
         private int n; // bieżąca liczba osób
     }
 
