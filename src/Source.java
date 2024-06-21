@@ -1,20 +1,25 @@
 import java.util.Arrays;
 import java.util.Stack;
+import java.util.Scanner;
 
 public class Source {
-    public static void main(String[] args) {
-        // TEST ZAD12
-        /*
-        Przykładowo dla tablicy T = [2, 3, 9, 5] i liczby x = 47 prawidłowa odpowiedź to {5, 9},
-        natomiast dla liczby x = 8 prawidłowa odpowiedź to {2, 5},
-         */
-        zad12 test12 = new zad12();
-        test12.arr = new int[]{2, 3, 9, 5};
-        System.out.println(Arrays.toString(test12.closesProduct(47)));
-        System.out.println(Arrays.toString(test12.closesProduct(8)));
-        ///////////////
+//    public static void main(String[] args) {
+//        // TEST ZAD12
+//        /*
+//        Przykładowo dla tablicy T = [2, 3, 9, 5] i liczby x = 47 prawidłowa odpowiedź to {5, 9},
+//        natomiast dla liczby x = 8 prawidłowa odpowiedź to {2, 5},
+//         */
+//        zad12 test12 = new zad12();
+//        test12.arr = new int[]{2, 3, 9, 5};
+//        System.out.println(Arrays.toString(test12.closesProduct(47)));
+//        System.out.println(Arrays.toString(test12.closesProduct(8)));
+//        ///////////////
+//
+//
 
-    }
+//
+//
+//    }
 }
 
 // EGZAMIN I MP 2019/2020
@@ -273,8 +278,6 @@ class Zad3 {
 
 
 
-
-
     /*
     Zad. 5 (8pkt) Grafy
 Dany jest graf nieskierowany G=(V, E), przy czym V = {a[0], ... , a[n-1]} – zbiór osób,
@@ -432,7 +435,116 @@ Proszę podać komentarze w liniach kodu funkcji pakuj(…), objaśniające jej 
  */
 
 class zad22 {
-    //dobre
+//    class IntStack {
+//        private int maxSize; // rozmiar tablicy zawierającej stos
+//        private int[] Elem; // tablica zawierająca stos
+//        private int top; // indeks wierzchołka stosu
+//        private int sum;
+//
+//        public IntStack(int size) { // konstruktor - Create()
+//            maxSize = size; // ustawiamy rozmiar tablicy
+//            Elem = new int[maxSize]; // tworzymy tablicę dla elementów
+//            top = maxSize; // na razie brak elementów (stos rośnie w górę)
+//            sum = 0;
+//        }
+//
+//        public int getSum() {
+//            return sum;
+//        }
+//
+//        public void push(int x) {
+//            if (isFull()) return;
+//            else Elem[--top] = x; // zmniejszamy top, odkładamy element
+//            sum += x;
+//        }
+//
+//        public int peek() {
+//            if (!isEmpty()) {
+//                return Elem[top];
+//            }
+//            return -10;
+//        }
+//
+//        public int pop() {
+//            if (!isEmpty()) {
+//                sum -= Elem[top];
+//                return Elem[top++];
+//            }
+//            return -10;
+//        }
+//
+//        public boolean isEmpty() { // zwraca true, jeżeli stos pusty
+//            return (top == maxSize);
+//        }
+//
+//        public boolean isFull() { // zwraca true, jeżeli stos pełny
+//            return (top == 0);
+//        }
+//
+////        public void Print() {
+////            System.out.printf("%d =", sum);
+////            for (int i = maxSize - 1; i >= top; i--) {
+////                System.out.printf(" %d", Elem[i]);
+////            }
+////        }
+//    }
+
+    static int k, // pojemnosc plecaka
+            n; // ilość elementów
+    static int [] tab; // tablica elementów
+    static boolean found;
+    static String out; // sekwencja elementów
+
+    static boolean pakuj(int weight, Stack<Integer> backpack, int takeThis, int sum) {
+        if (sum == weight) {
+            out = backpack.toString();
+            out = out.replaceAll("[\\[\\],]", "");
+            return true;
+        }
+        //jesli nie mozemy rozbudowywac kolejnych galezi cofamy sie o jedna nizej
+        if (takeThis < 0 || sum > weight) {
+            return false;
+        }
+
+        //pakujemy kolejny element do plecaka i rozbudowujemy galezie z niego
+        backpack.push(tab[takeThis]);
+        sum += tab[takeThis];
+        if (pakuj(weight, backpack, takeThis - 1, sum)) {
+            return true;
+        }
+
+        // jesli nie znajdzie tam to sprawdzaym kolejna galaz
+        int temp = backpack.pop(); //zdejmujemy to ktora nie wyszla
+        return pakuj(weight,backpack,takeThis - 1, sum - temp);
+    }
+
+    public static void main (String[] args) {
+        Scanner sc = new Scanner(System.in);
+        k = sc.nextInt();
+        n = sc.nextInt();
+        tab = new int[n];
+        for (int i = 0; i < n; i++) {
+            tab[i] = sc.nextInt();
+        }
+        out = "";
+
+        found = pakuj(k, new Stack<Integer>(), n - 1, 0);
+        if (found) {
+            System.out.println(out);
+        }
+
+        //TEST
+        /*
+        20
+        5
+        11 8 7 6 5
+
+        OUT:
+        8 7 5
+         */
+    }
+
+
 }
 
 
@@ -542,3 +654,41 @@ class zad32 {
     }
 
 }
+
+
+/*
+Zad. 4 Grafy (10p)
+Dany jest graf G=(V, E), w którym V = {a[0], ... , a[n-1]} – jest zbiorem osób, E = {{i, j} : osoba a[i]
+ma kontakt z osobą a[j]}. Ścieżka kontaktów długości k to ciąg osób (a[0], ... , a[k]) taki, że osoba
+a[i] ma osobę a[i+1] na liście kontaktów, O  i < k.
+Napisz metodę float ave-length() obliczającą średnią arytmetyczną długości najkrótszej ścieżki
+kontaktów pomiędzy wszystkimi parami różnych osób. Możesz założyć, że dla i j istnieje
+ścieżka kontaktów osoby a[ i] do osoby a[j].
+Podaj złożoność czasową i pamięciową podanego rozwiązania i zwięźle uzasadnij.
+infinity = +; { nieskończoność }
+Deklaracja grafu:
+class Graph{
+ private int MAX_VERTS = 20;
+ private int adjMat[ ][ ]; // macierz sąsiedztwa
+ private int n; // bieżąca liczba osób
+....
+}
+ gdzie:            _
+                  /   1 , gdy osoba i-ta ma j-tą na liście kontaktów,
+ adjMat [i, j] = |
+                  \_  0 , wpp.
+
+UWAGA. Rozwiązanie nie może korzystać z metod przeglądu grafów BFS i DFS.
+ */
+
+class zad42 {
+    class Graph {
+        private int MAX_VERTS = 20;
+        private int adjMat[ ][ ]; // macierz sąsiedztwa
+        private int n; // bieżąca liczba osób
+    }
+
+
+}
+
+
