@@ -3,23 +3,23 @@ import java.util.Stack;
 import java.util.Scanner;
 
 public class Source {
-//    public static void main(String[] args) {
-//        // TEST ZAD12
-//        /*
-//        Przykładowo dla tablicy T = [2, 3, 9, 5] i liczby x = 47 prawidłowa odpowiedź to {5, 9},
-//        natomiast dla liczby x = 8 prawidłowa odpowiedź to {2, 5},
-//         */
-//        zad12 test12 = new zad12();
-//        test12.arr = new int[]{2, 3, 9, 5};
-//        System.out.println(Arrays.toString(test12.closesProduct(47)));
-//        System.out.println(Arrays.toString(test12.closesProduct(8)));
-//        ///////////////
-//
-//
+    public static void main(String[] args) {
+        // TEST ZAD12
+        /*
+        Przykładowo dla tablicy T = [2, 3, 9, 5] i liczby x = 47 prawidłowa odpowiedź to {5, 9},
+        natomiast dla liczby x = 8 prawidłowa odpowiedź to {2, 5},
+         */
+        zad12 test12 = new zad12();
+        test12.arr = new int[]{2, 3, 9, 5};
+        System.out.println(Arrays.toString(test12.closesProduct(47)));
+        System.out.println(Arrays.toString(test12.closesProduct(8)));
+        ///////////////
 
-//
-//
-//    }
+
+
+
+
+    }
 }
 
 // EGZAMIN I MP 2019/2020
@@ -435,60 +435,6 @@ Proszę podać komentarze w liniach kodu funkcji pakuj(…), objaśniające jej 
  */
 
 class zad22 {
-//    class IntStack {
-//        private int maxSize; // rozmiar tablicy zawierającej stos
-//        private int[] Elem; // tablica zawierająca stos
-//        private int top; // indeks wierzchołka stosu
-//        private int sum;
-//
-//        public IntStack(int size) { // konstruktor - Create()
-//            maxSize = size; // ustawiamy rozmiar tablicy
-//            Elem = new int[maxSize]; // tworzymy tablicę dla elementów
-//            top = maxSize; // na razie brak elementów (stos rośnie w górę)
-//            sum = 0;
-//        }
-//
-//        public int getSum() {
-//            return sum;
-//        }
-//
-//        public void push(int x) {
-//            if (isFull()) return;
-//            else Elem[--top] = x; // zmniejszamy top, odkładamy element
-//            sum += x;
-//        }
-//
-//        public int peek() {
-//            if (!isEmpty()) {
-//                return Elem[top];
-//            }
-//            return -10;
-//        }
-//
-//        public int pop() {
-//            if (!isEmpty()) {
-//                sum -= Elem[top];
-//                return Elem[top++];
-//            }
-//            return -10;
-//        }
-//
-//        public boolean isEmpty() { // zwraca true, jeżeli stos pusty
-//            return (top == maxSize);
-//        }
-//
-//        public boolean isFull() { // zwraca true, jeżeli stos pełny
-//            return (top == 0);
-//        }
-//
-////        public void Print() {
-////            System.out.printf("%d =", sum);
-////            for (int i = maxSize - 1; i >= top; i--) {
-////                System.out.printf(" %d", Elem[i]);
-////            }
-////        }
-//    }
-
     static int k, // pojemnosc plecaka
             n; // ilość elementów
     static int [] tab; // tablica elementów
@@ -518,31 +464,31 @@ class zad22 {
         return pakuj(weight,backpack,takeThis - 1, sum - temp);
     }
 
-    public static void main (String[] args) {
-        Scanner sc = new Scanner(System.in);
-        k = sc.nextInt();
-        n = sc.nextInt();
-        tab = new int[n];
-        for (int i = 0; i < n; i++) {
-            tab[i] = sc.nextInt();
-        }
-        out = "";
-
-        found = pakuj(k, new Stack<Integer>(), n - 1, 0);
-        if (found) {
-            System.out.println(out);
-        }
-
-        //TEST
-        /*
-        20
-        5
-        11 8 7 6 5
-
-        OUT:
-        8 7 5
-         */
-    }
+//    public static void main (String[] args) {
+//        Scanner sc = new Scanner(System.in);
+//        k = sc.nextInt();
+//        n = sc.nextInt();
+//        tab = new int[n];
+//        for (int i = 0; i < n; i++) {
+//            tab[i] = sc.nextInt();
+//        }
+//        out = "";
+//
+//        found = pakuj(k, new Stack<Integer>(), n - 1, 0);
+//        if (found) {
+//            System.out.println(out);
+//        }
+//
+//        //TEST
+//        /*
+//        20
+//        5
+//        11 8 7 6 5
+//
+//        OUT:
+//        8 7 5
+//         */
+//    }
 
 
 }
