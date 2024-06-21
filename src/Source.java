@@ -1,4 +1,5 @@
 import java.util.Arrays;
+import java.util.Stack;
 
 public class Source {
     public static void main(String[] args) {
@@ -197,40 +198,40 @@ funkcji rekurencyjnej dodatkowe struktury są zabronione.
 
 */
 class Zad3 {
-    class LinkStack {
-        NodeStack top;
+//    class LinkStack {
+//        NodeStack top;
+//
+//
+//
+//        public LinkStack() {
+//            top = null;
+//        }
+//
+//        public NodeStack pop() {
+//            if (top != null) {
+//                NodeStack temp = top;
+//                top = top.prev;
+//                return temp;
+//            }
+//            return null;
+//        }
+//
+//        public void push(Node x, int index) {
+//            top = new NodeStack(x, top, index);
+//        }
+//
+//        public boolean isEmpty() {
+//            return (top == null);
+//        }
+//    }
 
-        class NodeStack {
-            NodeStack prev;
-            Node info;
-            int index;
+    class StackNode {
+        Node info;
+        int index;
 
-            public NodeStack(Node node, NodeStack prev, int index) {
-                info = node;
-                this.prev = prev;
-                this.index = index;
-            }
-        }
-
-        public LinkStack() {
-            top = null;
-        }
-
-        public NodeStack pop() {
-            if (top != null) {
-                NodeStack temp = top;
-                top = top.prev;
-                return temp;
-            }
-            return null;
-        }
-
-        public void push(Node x, int index) {
-            top = new NodeStack(x, top, index);
-        }
-
-        public boolean isEmpty() {
-            return (top == null);
+        public StackNode(Node node, int index) {
+            info = node;
+            this.index = index;
         }
     }
 
@@ -263,25 +264,30 @@ class Zad3 {
         return cur.value + max; //zwraca swoja wartosc + max z dzieci
     }
 
-    public int iterMaxVPath(Tree tree) {
+    public int iterMaxVPath(Tree tree) { //to raczej jest źle
         if (tree == null) return 0;
 
-        LinkStack stack = new LinkStack();
-        stack.push(tree.root, 0);
+        Stack<Node> stack = new Stack<>();
+        Stack<Integer> stackIndex = new Stack<>();
+
+        stack.push(tree.root);
+        stackIndex.push(0);
         int sum = 0; //suma aktualnie rozwazanej sciezki
         int maxsum = Integer.MIN_VALUE;
         while (!stack.isEmpty()) {
-            LinkStack.NodeStack temp = stack.pop();
-            int index = temp.index; //index dziecka
-            if (index < temp.info.children.length) { //jesli jest jeszcze jakies dziecko
-                stack.push(temp.info, index++); //rodzic na stos
-                stack.push(temp.info.children[index], 0); //dziecko na stos
-                sum += temp.info.children[index].value; //suma zwiekszona o rozwazane dziecko
+            Node temp = stack.pop();
+            int index = stackIndex.pop(); //index dziecka
+            if (index < temp.children.length) { //jesli jest jeszcze jakies dziecko
+                stack.push(temp); //rodzic na stos
+                stackIndex.push(index + 1); //index kolejnego dziecka
+                stack.push(temp.children[index]);//dziecko na stos
+                stackIndex.push(0); //dziecko index dziecka
+                sum += temp.children[index].value; //suma zwiekszona o rozwazane dziecko
             } else { //dzieci sie skonczyly to cofka
                 if (sum > maxsum) {
                     maxsum = sum;
                 } else {
-                    sum -= temp.info.value;
+                    sum -= temp.value;
                 }
             }
         }
@@ -452,4 +458,114 @@ Proszę podać komentarze w liniach kodu funkcji pakuj(…), objaśniające jej 
 
  */
 
+class zad22 {
+    //dobre
+}
 
+
+/*
+Zad. 3 Drzewa (10p)
+Dane są klasy Node oraz Tree:
+class Node {
+ public int value;
+ public Node parent;
+ public Node left;
+ public Node right;
+ ...
+}
+class Tree {
+ public node root;
+ ...
+}
+Napisz dwie metody:
+1. boolean is_BST(Tree tree); - sprawdza , czy podane drzewo binarne jest drzewem
+BST
+2. boolean is_MaxHeap(Tree tree); - sprawdza , czy podane drzewo binarne jest
+max-kopcem, tzn. czy wartość danego węzła, który nie jest korzeniem jest zawsze 
+niż wartość jego rodzica.
+Metoda is_BST powinna zostać napisana rekurencyjnie, natomiast is_MaxHeap iteracyjnie
+(można korzystać z dodatkowych struktur danych). Oszacuj i uzasadnij złożoność swoich
+algorytmów.
+Za każdą z metod można uzyskać 5 punktów, w tym: 2 punkty za poprawną metodę, kolejne 2
+za złożoność liniową oraz 1 punkt za poprawne oszacowanie własnej złożoności.
+Na początku proszę podać ideę rozwiązania. Proszę również dodać komentarze w kluczowych
+liniach kodu.
+
+ */
+
+class zad32 {
+    class Node {
+        public int value;
+        public Node parent;
+        public Node left;
+        public Node right;
+    }
+
+    class Tree {
+        public Node root;
+    }
+
+    class StackNode {
+        Node node;
+        int check; // ile do sprawdzenia dzieci
+
+        StackNode(Node node, int check) {
+            this.node = node;
+            this.check = check;
+        }
+
+    }
+
+    boolean isbstrec(Node cur) {
+        if (cur == null) return true;
+
+        if (cur.left != null) {
+            if (cur.left.value > cur.value) {
+                return false;
+            }
+        }
+
+        if (cur.right != null) {
+            if (cur.right.value < cur.value) {
+                return false;
+            }
+        }
+
+        return (isbstrec(cur.left) && isbstrec(cur.right));
+    }
+
+    boolean isBST(Tree tree) {
+        if (tree == null) return false;
+
+        return isbstrec(tree.root);
+    }
+
+
+    boolean isMaxHeap(Tree tree) {
+        if (tree == null) return false;
+        Stack<Node> stack = new Stack<>();
+        stack.push(tree.root);
+
+        while (!stack.isEmpty()) {
+            Node temp = stack.pop();
+            if (temp != null) {
+                if (temp.left != null) {
+                    if (temp.left.value > temp.value) {
+                        return false;
+                    }
+                    stack.push(temp.left);
+                }
+
+                if (temp.right != null) {
+                    if (temp.right.value > temp.value) {
+                        return false;
+                    }
+                    stack.push(temp.right);
+                }
+            }
+        }
+
+        return true;
+    }
+
+}
