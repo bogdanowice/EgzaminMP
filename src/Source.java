@@ -198,33 +198,6 @@ funkcji rekurencyjnej dodatkowe struktury są zabronione.
 
 */
 class Zad3 {
-//    class LinkStack {
-//        NodeStack top;
-//
-//
-//
-//        public LinkStack() {
-//            top = null;
-//        }
-//
-//        public NodeStack pop() {
-//            if (top != null) {
-//                NodeStack temp = top;
-//                top = top.prev;
-//                return temp;
-//            }
-//            return null;
-//        }
-//
-//        public void push(Node x, int index) {
-//            top = new NodeStack(x, top, index);
-//        }
-//
-//        public boolean isEmpty() {
-//            return (top == null);
-//        }
-//    }
-
     class StackNode {
         Node info;
         int index;
