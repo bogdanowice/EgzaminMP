@@ -999,8 +999,8 @@ class zad24 {
         }
 
         Node Successor(int x) {
-            /** to samo co wczesniej
-             {@link zad33.Tree#predecessor(int)}
+            /**
+             * {@link zad33.Tree#predecessor(int) toSamo}
              */
             return null;
         }
