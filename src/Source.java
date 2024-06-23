@@ -893,6 +893,51 @@ Dany jest fragment klasy Tree drzewa  BST w Javie:
  */
 
 class zad33 {
+    class Node   {
+        public int info;             // element danych (klucz)
+        public Node left;          // lewy potomek węzła
+        public Node right;        // prawy lewy potomek węzła
+    }
+
+    class Tree {
+        private  Node  root;
+        public Tree()  {   root = null; }// na razie drzewo jest puste
+
+        //INORDER :  LEFT  ROOT  RIGHT
+        Node predecessor(int x) {
+            Node cur = root;
+            Node parent = null;
+
+            while (cur != null) {
+                if (cur.info == x) {
+                    break;
+                } else if (cur.info < x) {
+                    cur = cur.right;
+                } else {
+                    cur = cur.left;
+                }
+                parent = cur;
+            }
+
+            if (cur == null) {
+                return null;
+            }
+
+            if (cur.left != null) { //jesli ma lewe dziecko to idziemy do najbardziej po prawej tego dziecka bo bedzie obok w inorder
+                cur = cur.left;
+                while (cur.right != null) {
+                    cur = cur.right;
+                }
+                return cur;
+            } else { //jesli nie ma to zwracamy parenta bo bedzie po jego prawej stronie
+                return parent; //jesli cur == root to i tak zwroci null wiec git
+            }
+        }
+
+    }
+
+
+
 
 }
 
