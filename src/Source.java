@@ -867,11 +867,12 @@ class zad33 {
                 if (cur.info == x) {
                     break;
                 } else if (cur.info < x) {
+                    parent = cur;
                     cur = cur.right;
                 } else {
+                    parent = cur;
                     cur = cur.left;
                 }
-                parent = cur;
             }
 
             if (cur == null) {
@@ -937,6 +938,76 @@ Podaj złożoność czasową i pamięciową podanych rozwiązań i zwięźle uza
 class zad43 {
     //to samo co zad5
 }
+
+
+// EGZAMIN 2013/14
+// https://mordor.ksi.ii.uj.edu.pl/file/ii/sem_2/MP/Egzaminy/2013-2014/
+
+/*
+
+Zadanie 1
+https://mordor.ksi.ii.uj.edu.pl/file/ii/sem_2/MP/Egzaminy/2013-2014/egzamin_2013_2014_1.jpg
+ */
+
+
+/*
+Zadanie 2
+https://mordor.ksi.ii.uj.edu.pl/file/ii/sem_2/MP/Egzaminy/2013-2014/egzamin_2013_2014_2.jpg
+ */
+
+class zad24 {
+    class Node {
+        public int info;
+        public Node left;
+        public Node right;
+    }
+
+    class Tree {
+        public Node root;
+
+        Node search(int x) {
+            Node cur = root;
+            while (cur != null) {
+                if (cur.info == x) {
+                    return cur;
+                } else if (cur.info < x) {
+                    cur = cur.right;
+                } else {
+                    cur = cur.left;
+                }
+            }
+
+            return null;
+        }
+
+        Node Parent(int x) {
+            Node cur = root;
+            Node parent = null;
+            while (cur != null) {
+                if (cur.info == x) {
+                    return parent;
+                } else if (cur.info < x) {
+                    parent = cur;
+                    cur = cur.right;
+                } else {
+                    parent = cur;
+                    cur = cur.left;
+                }
+            }
+
+            return null;
+        }
+
+        Node Successor(int x) {
+            /** to samo co wczesniej
+             {@link zad33.Tree#predecessor(int)}
+             */
+            return null;
+        }
+
+    }
+}
+
 
 
 /*
@@ -1024,7 +1095,7 @@ class zad44 {
                     while (!q.isEmpty()) {
                         int cur = q.poll();
 
-                        for (int j = 0;  j < nVerts; j++) {
+                        for (int j = 0; j < nVerts; j++) {
                             if (adjMat[cur][j] == 1 && !vertexList[j].wasVisited) {
                                 q.add(j); //dodaje sasiadow do queue
                                 vertexList[j].wasVisited = true; // ustawia visited ze juz naleza do podgrafu spojnego
