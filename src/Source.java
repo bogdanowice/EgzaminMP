@@ -338,7 +338,7 @@ class zad5 {
                 }
             }
 
-            return avg / 2 * n; //imo podzielic jeszcze przez 2 bo jest nieskierowany
+            return avg / (2 * n); //imo podzielic jeszcze przez to 2 bo jest nieskierowany
         }
     }
 }
@@ -677,6 +677,7 @@ class zad42 {
 
         // algos Floyd Warshall
         float averageLength() {
+            //liczy poczatkowa tablice odleglosci
             int[][] pathDist = new int[n][n];
             for (int i = 0; i < n; i++) {
                 for (int j = 0; j < n; j++) {
@@ -692,6 +693,7 @@ class zad42 {
                 }
             }
 
+            //algos florydy
             for (int k = 0; k < n; k++) {
                 for (int i = 0; i < n; i++) {
                     for (int j = 0; j < n;j++) {
@@ -703,18 +705,14 @@ class zad42 {
             }
 
             float avg = 0;
-
+            //liczy srednia
             for (int i = 0; i < n; i++) {
                 for (int j = 0; j < n; j++) {
                     avg += pathDist[i][j];
                 }
             }
 
-            return avg / 2 * n; //imo podzielic jeszcze przez 2 bo jest nieskierowany
+            return avg / (2 * n); //imo podzielic jeszcze przez 2 bo jest nieskierowany
         }
     }
-
-
 }
-
-
