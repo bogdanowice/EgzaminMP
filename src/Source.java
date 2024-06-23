@@ -1011,29 +1011,6 @@ class zad44 {
             return -1;
         }
 
-//        int bfs(int start) {
-//            if (vertexList[start].wasVisited) {
-//                return 0; //zwraca 0 jestli juz vertex odwiedzalismy (czyli nalezy do podgrafu wczesniej odkrytego)
-//            }
-//            Queue<Integer> q = new LinkedList<>();
-//            vertexList[start].wasVisited = true;
-//            q.add(start);
-//
-//            while (!q.isEmpty()) {
-//                int cur = q.poll();
-//
-//                for (int i = 0;  i < nVerts; i++) {
-//                    if (adjMat[cur][i] == 1 && !vertexList[i].wasVisited) {
-//                        q.add(i);
-//                        vertexList[i].wasVisited = true; // ustawia visited ze juz naleza do podgrafu spojnego
-//                    }
-//                }
-//            }
-//
-//            return 1;
-//        }
-
-
         //chyba trzeba znalezc ile jest rozlacznych podgrafow (jak liczba takich podgrafow bedzie n to zwracamy n - 1 bo tyle krawedzi potrzeba zeby je polaczyc)
         public void mst() {
             int count = 0; //ile podgrafow
