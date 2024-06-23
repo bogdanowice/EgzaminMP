@@ -788,7 +788,8 @@ Dla zadanej tablicy a[LEN], korzystając z metody „dziel i zwyciężaj”, nap
 działającą w czasie O(n log n), która zwraca liczbę inwersji w tablicy a[n], czyli liczbę par elementów (a[i], a[j]), dla których   ( i < j  and a[i] > a[j] )
 
  */
-
+//pojebane
+// https://www.geeksforgeeks.org/inversion-count-in-array-using-merge-sort/
 class zad23 {
     void swap(int[] a, int j, int i) {
         int temp = a[i];
@@ -796,28 +797,10 @@ class zad23 {
         a[j] = temp;
     }
 
-    int Inversion(int[] a, int L, int R) { //nwm czy to ma jakikolwiek sens na oko zrobione
-        if (R - L <= 0) {
-            return 0;
-        }
-        int swaps = 0;
-        int pivot = a[R];
-        int i = L - 1;
-        //robic partition lomuto i liczyc swapy
-        for (int j = L; j < R; j++) {
-            if (a[j] < pivot) {
-                i++;
-                swap(a, j, i);
-                swaps++;
-            }
-        }
-        if (i + 1 != R) {
-            swap(a, i + 1, R);
-            swaps++;
-        }
-
-        return swaps + Inversion(a, L, i) + Inversion(a, i + 2, R);
+    int Inversion(int[] a, int L, int R) {
+        return 0;
     }
+
 }
 
 /*
@@ -944,13 +927,6 @@ class zad43 {
 // https://mordor.ksi.ii.uj.edu.pl/file/ii/sem_2/MP/Egzaminy/2013-2014/
 
 /*
-
-Zadanie 1
-https://mordor.ksi.ii.uj.edu.pl/file/ii/sem_2/MP/Egzaminy/2013-2014/egzamin_2013_2014_1.jpg
- */
-
-
-/*
 Zadanie 2
 https://mordor.ksi.ii.uj.edu.pl/file/ii/sem_2/MP/Egzaminy/2013-2014/egzamin_2013_2014_2.jpg
  */
@@ -1008,7 +984,11 @@ class zad24 {
     }
 }
 
-
+/*
+zadanie 3
+https://mordor.ksi.ii.uj.edu.pl/file/ii/sem_2/MP/Egzaminy/2013-2014/egzamin_2013_2014_3.jpg
+to samo co zad23
+ */
 
 /*
 https://mordor.ksi.ii.uj.edu.pl/file/ii/sem_2/MP/Egzaminy/2013-2014/egzamin_2013_2014_4.jpg
