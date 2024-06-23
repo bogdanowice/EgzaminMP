@@ -1,6 +1,4 @@
-import java.util.Arrays;
-import java.util.Stack;
-import java.util.Scanner;
+import java.util.*;
 
 public class Source {
     public static void main(String[] args) {
@@ -21,7 +19,6 @@ public class Source {
 //        int[] a = new int[]{9,8,7,6,5,4,3,2,1};
 //        t.Sort(a);
 //        System.out.println(Arrays.toString(a));
-
 
 
     }
@@ -306,6 +303,7 @@ adjMat [i, j] =  |
  */
 class zad5 {
     int INF = Integer.MAX_VALUE; //nieskonczonosc
+
     class Graph {
         private int MAX_VERTS = 20;
         private int adjMat[][]; // macierz sąsiedztwa
@@ -330,7 +328,7 @@ class zad5 {
 
             for (int k = 0; k < n; k++) {
                 for (int i = 0; i < n; i++) {
-                    for (int j = 0; j < n;j++) {
+                    for (int j = 0; j < n; j++) {
                         if (pathDist[i][k] + pathDist[k][j] < pathDist[i][j]) {
                             pathDist[i][j] = pathDist[i][k] + pathDist[k][j];
                         }
@@ -681,9 +679,6 @@ class zad42 {
 }
 
 
-
-
-
 /// zadania poprawkowe 2022.txt
 
 /*
@@ -707,6 +702,7 @@ class zad13 {
     class PQueue {
         int[] a; //min heap
         int size;
+
         public PQueue(int size) {
             a = new int[size];
             this.size = size;
@@ -754,8 +750,8 @@ class zad13 {
 
         void DownHeap(int index) {
             int smalest = index;
-            int left = 2 *index + 1;
-            int right = 2 *index + 2;
+            int left = 2 * index + 1;
+            int right = 2 * index + 2;
 
             if (left < size && a[left] < a[smalest]) {
                 smalest = left;
@@ -772,7 +768,7 @@ class zad13 {
         }
     }
 
-   void Sort(int arr[]) {
+    void Sort(int arr[]) {
         PQueue q = new PQueue(0);
         q.Construct(arr);
 
@@ -799,6 +795,7 @@ class zad23 {
         a[i] = a[j];
         a[j] = temp;
     }
+
     int Inversion(int[] a, int L, int R) { //nwm czy to ma jakikolwiek sens na oko zrobione
         if (R - L <= 0) {
             return 0;
@@ -814,7 +811,7 @@ class zad23 {
                 swaps++;
             }
         }
-        if(i +1 != R) {
+        if (i + 1 != R) {
             swap(a, i + 1, R);
             swaps++;
         }
@@ -848,15 +845,18 @@ Dany jest fragment klasy Tree drzewa  BST w Javie:
  */
 
 class zad33 {
-    class Node   {
+    class Node {
         public int info;             // element danych (klucz)
         public Node left;          // lewy potomek węzła
         public Node right;        // prawy lewy potomek węzła
     }
 
     class Tree {
-        private  Node  root;
-        public Tree()  {   root = null; }// na razie drzewo jest puste
+        private Node root;
+
+        public Tree() {
+            root = null;
+        }// na razie drzewo jest puste
 
         //INORDER :  LEFT  ROOT  RIGHT
         Node predecessor(int x) {
@@ -889,10 +889,25 @@ class zad33 {
             }
         }
 
+        int DepthNode(int x) {
+            int depth = 0; //root jest na depth 0
+            Node cur = root;
+
+            while (cur != null) {
+                if (cur.info == x) {
+                    return depth;
+                } else if (cur.info < x) {
+                    cur = cur.right;
+                } else {
+                    cur = cur.left;
+                }
+                depth++;
+            }
+
+            return -1; //nie znaleziono
+        }
+
     }
-
-
-
 
 }
 
@@ -919,13 +934,138 @@ wszystkimi parami różnych osób.
 Podaj złożoność czasową i pamięciową podanych rozwiązań i zwięźle uzasadnij.
  */
 
-class zad43{
+class zad43 {
     //to samo co zad5
 }
 
 
+/*
+https://mordor.ksi.ii.uj.edu.pl/file/ii/sem_2/MP/Egzaminy/2013-2014/egzamin_2013_2014_4.jpg
+Zadanie 4
+Dany jest graf G-(V, E), w którym V zbiór wierzchołków, E- krawędź pomiędzy.
+Napisz nierekurencyjne metody:
+1. (8pkt) void mst(), która wypisze minimalną liczbę krawędzi, wymaganych do połączenia wszystkich wierzchołków w grafie.
+2. (2pkt) int getAdjUnvisitedVertex(int v), która zwraca nieodwiedzony wierzchołek przyległy do v lub -1 w przeciwnym przypadku.
+Oraz (3pkt) określ złożoność czasową i pamięciową podanych rozwiązań i zwięźle uzasadnij.
+class Vertex
+public char label; // etykieta (np. 'A')
+public boolean wasVisited;
+public Vertex(char lab) { // konstruktor label lab
+wasVisited false;
+// end class Vertex
+class Graph (
+    private final int MAX VERTS 20
+    private Vertex vertexList(); // lista wierzchołków private int ad Mat]://tablica sąsiedztwa
+    private int nVerts: // bieżąca liczba wierzchołków
+public Graph() { // konstruktor
+    vertextist = new Vertex(MAX_VERTS];
+    // lista wierzchołków
+    adjMate new int[MAX_VERTS][MAX VERTS]; // tablica sąsiedztwa
+    nVerts-0
+    for(int j=0; j<MAX VERTS; j++)
+        for(int k=0; k<MAX_VERTS; k++)
+            ad Mat[(k) = 0;
+    }// end constructor
+ */
 
 
+class zad44 {
+    class Vertex {
+        public char label;
+        public boolean wasVisited;
+
+        public Vertex(char lab) {
+            label = lab;
+            wasVisited = false;
+        }
+
+    }
+
+    class Graph {
+        private final int MAXVERTS = 20;
+        private Vertex[] vertexList; // lista wierzchołków
+        private int adjMat[][]; //tablica sasiedztwa
+        private int nVerts; //biezaca liczba wierzcholkow
+
+        public Graph() { // konstruktor
+            vertexList = new Vertex[MAXVERTS];
+            adjMat = new int[MAXVERTS][MAXVERTS];
+            nVerts = 0;
+            for (int i = 0; i < MAXVERTS; i++) {
+                for (int j = 0; j < MAXVERTS; j++) {
+                    adjMat[i][j] = 0;
+                }
+            }
+        }// end constructor
 
 
+        public int getAdjUnvisitedVertex(int v) {
+            if (v < nVerts) {
+                for (int i = 0; i < nVerts; i++) {
+                    if (adjMat[v][i] == 1) { //jesli jest w relacji z v
+                        if (!vertexList[i].wasVisited) //jesli nie zostalo juz odwiedzone
+                            return i;
+                    }
+                }
+            }
+            return -1;
+        }
 
+//        int bfs(int start) {
+//            if (vertexList[start].wasVisited) {
+//                return 0; //zwraca 0 jestli juz vertex odwiedzalismy (czyli nalezy do podgrafu wczesniej odkrytego)
+//            }
+//            Queue<Integer> q = new LinkedList<>();
+//            vertexList[start].wasVisited = true;
+//            q.add(start);
+//
+//            while (!q.isEmpty()) {
+//                int cur = q.poll();
+//
+//                for (int i = 0;  i < nVerts; i++) {
+//                    if (adjMat[cur][i] == 1 && !vertexList[i].wasVisited) {
+//                        q.add(i);
+//                        vertexList[i].wasVisited = true; // ustawia visited ze juz naleza do podgrafu spojnego
+//                    }
+//                }
+//            }
+//
+//            return 1;
+//        }
+
+
+        //chyba trzeba znalezc ile jest rozlacznych podgrafow (jak liczba takich podgrafow bedzie n to zwracamy n - 1 bo tyle krawedzi potrzeba zeby je polaczyc)
+        public void mst() {
+            int count = 0; //ile podgrafow
+            for (int i = 0; i < nVerts; i++) {
+                if (!vertexList[i].wasVisited) { //jesli jeszcze nie odwiedzony to znaczy ze nalezy do sprawdzanego podgrafu
+                    //ponizej algos bfs
+                    Queue<Integer> q = new LinkedList<>();
+                    vertexList[i].wasVisited = true;
+                    q.add(i);
+
+                    while (!q.isEmpty()) {
+                        int cur = q.poll();
+
+                        for (int j = 0;  j < nVerts; j++) {
+                            if (adjMat[cur][j] == 1 && !vertexList[j].wasVisited) {
+                                q.add(j); //dodaje sasiadow do queue
+                                vertexList[j].wasVisited = true; // ustawia visited ze juz naleza do podgrafu spojnego
+                            }
+                        }
+                    }
+                    count++;
+                }
+            }
+
+            //przywraca visited do defaultowej formy
+            for (int i = 0; i < nVerts; i++) {
+                vertexList[i].wasVisited = false;
+            }
+
+            System.out.printf("Trzeba dodac %d krawedzi\n", count);
+        }
+
+
+    }
+}
