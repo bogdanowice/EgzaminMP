@@ -9,11 +9,19 @@ public class Source {
         Przykładowo dla tablicy T = [2, 3, 9, 5] i liczby x = 47 prawidłowa odpowiedź to {5, 9},
         natomiast dla liczby x = 8 prawidłowa odpowiedź to {2, 5},
          */
-        zad12 test12 = new zad12();
-        test12.arr = new int[]{2, 3, 9, 5};
-        System.out.println(Arrays.toString(test12.closesProduct(47)));
-        System.out.println(Arrays.toString(test12.closesProduct(8)));
-        ///////////////
+//        zad12 test12 = new zad12();
+//        test12.arr = new int[]{2, 3, 9, 5};
+//        System.out.println(Arrays.toString(test12.closesProduct(47)));
+//        System.out.println(Arrays.toString(test12.closesProduct(8)));
+//        ///////////////
+
+
+        //zad13
+//        zad13 t = new zad13();
+//        int[] a = new int[]{9,8,7,6,5,4,3,2,1};
+//        t.Sort(a);
+//        System.out.println(Arrays.toString(a));
+
 
 
     }
@@ -716,3 +724,208 @@ class zad42 {
         }
     }
 }
+
+
+
+
+
+/// zadania poprawkowe 2022.txt
+
+/*
+Zad. 1
+1. Podaj  kod  potrzebnych operacji  kopca, wykorzystywanych do implementacji kolejki priorytetowej.
+  2.. Zdefiniuj w Javie klasę o nazwie PQueue, implementującą kolejkę priorytetową typu MIN, zawierającą poniższe metody
+
+            i.        void Insert( int x) – wstawia element  ‘x’ do kolejki
+
+            ii.        int Min() – zwraca element i najmniejszym priorytecie
+
+            iii.       int Delete_Min () – usuwa i zwraca element o najmniejszym priorytecie z kolejki
+
+            iv.       void Construct( int a[n]) - twórz kolejkę z podanych elementów w tablicy a[]
+
+ 3.  Napisz metodę sortowania wykorzystującą taką kolejkę, podaj jej złożoność czasową i pamięciową.
+
+ */
+
+class zad13 {
+    class PQueue {
+        int[] a; //min heap
+        int size;
+        public PQueue(int size) {
+            a = new int[size];
+            this.size = size;
+        }
+
+        void swap(int i, int j) {
+            int temp = a[i];
+            a[i] = a[j];
+            a[j] = temp;
+        }
+
+        void Insert(int x) {
+            if (size < a.length) {
+                int index = size;
+                a[index] = x;
+                while (index > 0 && a[(index - 1) / 2] > a[index]) {
+                    swap(index, (index - 1) / 2);
+                    index = (index - 1) / 2; //index rodzica
+                }
+
+                size++;
+            }
+        }
+
+        int Min() {
+            return a[0];
+        }
+
+        int deleteMin() {
+            int temp = a[0];
+            a[0] = a[--size];
+            if (size != 0)
+                DownHeap(0);
+
+            return temp;
+        }
+
+        void Construct(int[] arr) {
+            size = 0;
+            a = new int[arr.length];
+            for (int i : arr) {
+                Insert(i);
+            }
+        }
+
+        void DownHeap(int index) {
+            int smalest = index;
+            int left = 2 *index + 1;
+            int right = 2 *index + 2;
+
+            if (left < size && a[left] < a[smalest]) {
+                smalest = left;
+            }
+
+            if (right < size && a[right] < a[smalest]) {
+                smalest = right;
+            }
+
+            if (smalest != index) {
+                swap(index, smalest);
+                DownHeap(smalest);
+            }
+        }
+    }
+
+   void Sort(int arr[]) {
+        PQueue q = new PQueue(0);
+        q.Construct(arr);
+
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = q.deleteMin();
+        }
+
+    }
+
+}
+
+
+
+/*
+Zad. 2 (10 pkt) 10:40-11:10Egzamin pisemny (Zadanie)
+Dla zadanej tablicy a[LEN], korzystając z metody „dziel i zwyciężaj”, napisz  w Javie  rekurencyjną funkcję   int Inversion(int a[], int L, int R),
+działającą w czasie O(n log n), która zwraca liczbę inwersji w tablicy a[n], czyli liczbę par elementów (a[i], a[j]), dla których   ( i < j  and a[i] > a[j] )
+
+ */
+
+class zad23 {
+    void swap(int[] a, int j, int i) {
+        int temp = a[i];
+        a[i] = a[j];
+        a[j] = temp;
+    }
+    int Inversion(int[] a, int L, int R) { //nwm czy to ma jakikolwiek sens na oko zrobione
+        if (R - L <= 0) {
+            return 0;
+        }
+        int swaps = 0;
+        int pivot = a[R];
+        int i = L - 1;
+        //robic partition lomuto i liczyc swapy
+        for (int j = L; j < R; j++) {
+            if (a[j] < pivot) {
+                i++;
+                swap(a, j, i);
+                swaps++;
+            }
+        }
+        if(i +1 != R) {
+            swap(a, i + 1, R);
+            swaps++;
+        }
+
+        return swaps + Inversion(a, L, i) + Inversion(a, i + 2, R);
+    }
+}
+
+/*
+Zad. 3 (10 pkt) 11:05-11:40Egzamin pisemny (Zadanie)
+Dany jest fragment klasy Tree drzewa  BST w Javie:
+       class Node   {
+                                  public int info;             // element danych (klucz)
+                                  public Node left;          // lewy potomek węzła
+                                  public Node right;        // prawy lewy potomek węzła
+                        }
+
+    class BSTree {
+                         private  Node  root;
+                         public Tree()  {   root = null; }            // na razie drzewo jest puste
+                            …
+                }     // koniec klasy Tree
+
+ Napisz   w Javie iteracyjne metody:
+
+(a)   Node predecessor( int x) - zwraca referencję do poprzednika (w sensie inorder) węzła o kluczu x   lub   null.
+        Uwaga: metoda nie może korzystać z operacji parent()
+
+(b)   int depth_node( int x ) - zwraca głębokość węzła o kluczu x  w drzewie
+
+ */
+
+class zad33 {
+
+}
+
+
+/*
+Zad. 4 (10 pkt) 11:40-12:20Egzamin pisemny (Zadanie)
+Dany jest graf G=(V, E), w którym V={a[0],..., a[n-1]} – zbiór różnych osób, E={{i, j}: osoba a[i] ma kontakt z osobą a[j]}.
+Ścieżka kontaktów o długości k to ciąg osób (a[0],..., a[k]) taki, że dla  O <= i < k, a[i]  ma  a[i+1] na liście kontaktów,
+
+Wykorzystując poniższą deklarację klasy grafu:
+     infinity = +∞; { nieskończoność }
+     class Graph {
+                                public  int MAX_VERTS = 20;
+                                public  int  adjMat[ ][ ]; // macierz sąsiedztwa
+                                                                          // przy czym: adjMat[i, j]=   {1, gdy osoba i-ta ma j-tą na liście
+                                                                          //kontaktów lub  0, wpp} .
+                                public  int  n;            // bieżąca liczba osób
+
+}
+
+Zakładając, że dla i różnego od j istnieje ścieżka kontaktów osoby i do osoby j, napisz w Javie efektywną metodę
+float average-length() - obliczającą średnią arytmetyczną długości najkrótszych ścieżek kontaktów pomiędzy
+wszystkimi parami różnych osób.
+Podaj złożoność czasową i pamięciową podanych rozwiązań i zwięźle uzasadnij.
+ */
+
+class zad43{
+
+}
+
+
+
+
+
+
+
