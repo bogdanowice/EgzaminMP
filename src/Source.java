@@ -1001,7 +1001,6 @@ class zad24 {
         Node Successor(int x) {
             /**
              * {@link zad33.Tree#predecessor(int) toSamo}
-             * @see zad33.Tree#predecessor(int)
              */
             return null;
         }
