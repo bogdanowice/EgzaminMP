@@ -677,52 +677,7 @@ UWAGA. Rozwiązanie nie może korzystać z metod przeglądu grafów BFS i DFS.
  */
 
 class zad42 {
-    int INF = Integer.MAX_VALUE; //nieskonczonosc
-    class Graph {
-        private int MAX_VERTS = 20;
-        private int adjMat[][]; // macierz sąsiedztwa
-        private int n; // bieżąca liczba osób
-
-        // algos Floyd Warshall
-        float averageLength() {
-            //liczy poczatkowa tablice odleglosci
-            int[][] pathDist = new int[n][n];
-            for (int i = 0; i < n; i++) {
-                for (int j = 0; j < n; j++) {
-                    if (adjMat[i][j] == 0) {
-                        if (i != j) {
-                            pathDist[i][j] = INF;
-                        } else {
-                            pathDist[i][j] = 0;
-                        }
-                    } else {
-                        pathDist[i][j] = 1;
-                    }
-                }
-            }
-
-            //algos florydy
-            for (int k = 0; k < n; k++) {
-                for (int i = 0; i < n; i++) {
-                    for (int j = 0; j < n;j++) {
-                        if (pathDist[i][k] + pathDist[k][j] < pathDist[i][j]) {
-                            pathDist[i][j] = pathDist[i][k] + pathDist[k][j];
-                        }
-                    }
-                }
-            }
-
-            float avg = 0;
-            //liczy srednia
-            for (int i = 0; i < n; i++) {
-                for (int j = 0; j < n; j++) {
-                    avg += pathDist[i][j];
-                }
-            }
-
-            return avg / (2 * n); //imo podzielic jeszcze przez 2 bo jest nieskierowany
-        }
-    }
+    //to samo co zad5
 }
 
 
@@ -965,7 +920,7 @@ Podaj złożoność czasową i pamięciową podanych rozwiązań i zwięźle uza
  */
 
 class zad43{
-
+    //to samo co zad5
 }
 
 
