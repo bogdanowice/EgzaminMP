@@ -297,15 +297,50 @@ adjMat [i, j] =  |
 
  */
 class zad5 {
+    int INF = Integer.MAX_VALUE; //nieskonczonosc
     class Graph {
         private int MAX_VERTS = 20;
         private int adjMat[][]; // macierz sąsiedztwa
         private int n; // bieżąca liczba osób
+
+        // algos Floyd Warshall
+        float averageLength() {
+            int[][] pathDist = new int[n][n];
+            for (int i = 0; i < n; i++) {
+                for (int j = 0; j < n; j++) {
+                    if (adjMat[i][j] == 0) {
+                        if (i != j) {
+                            pathDist[i][j] = INF;
+                        } else {
+                            pathDist[i][j] = 0;
+                        }
+                    } else {
+                        pathDist[i][j] = 1;
+                    }
+                }
+            }
+
+            for (int k = 0; k < n; k++) {
+                for (int i = 0; i < n; i++) {
+                    for (int j = 0; j < n;j++) {
+                        if (pathDist[i][k] + pathDist[k][j] < pathDist[i][j]) {
+                            pathDist[i][j] = pathDist[i][k] + pathDist[k][j];
+                        }
+                    }
+                }
+            }
+
+            float avg = 0;
+
+            for (int i = 0; i < n; i++) {
+                for (int j = 0; j < n; j++) {
+                    avg += pathDist[i][j];
+                }
+            }
+
+            return avg / 2 * n; //imo podzielic jeszcze przez 2 bo jest nieskierowany
+        }
     }
-
-
-
-
 }
 
 /////// EGZAMIN 1 2018/2019
@@ -634,10 +669,49 @@ UWAGA. Rozwiązanie nie może korzystać z metod przeglądu grafów BFS i DFS.
  */
 
 class zad42 {
+    int INF = Integer.MAX_VALUE; //nieskonczonosc
     class Graph {
         private int MAX_VERTS = 20;
         private int adjMat[][]; // macierz sąsiedztwa
         private int n; // bieżąca liczba osób
+
+        // algos Floyd Warshall
+        float averageLength() {
+            int[][] pathDist = new int[n][n];
+            for (int i = 0; i < n; i++) {
+                for (int j = 0; j < n; j++) {
+                    if (adjMat[i][j] == 0) {
+                        if (i != j) {
+                            pathDist[i][j] = INF;
+                        } else {
+                            pathDist[i][j] = 0;
+                        }
+                    } else {
+                        pathDist[i][j] = 1;
+                    }
+                }
+            }
+
+            for (int k = 0; k < n; k++) {
+                for (int i = 0; i < n; i++) {
+                    for (int j = 0; j < n;j++) {
+                        if (pathDist[i][k] + pathDist[k][j] < pathDist[i][j]) {
+                            pathDist[i][j] = pathDist[i][k] + pathDist[k][j];
+                        }
+                    }
+                }
+            }
+
+            float avg = 0;
+
+            for (int i = 0; i < n; i++) {
+                for (int j = 0; j < n; j++) {
+                    avg += pathDist[i][j];
+                }
+            }
+
+            return avg / 2 * n; //imo podzielic jeszcze przez 2 bo jest nieskierowany
+        }
     }
 
 
